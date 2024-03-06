@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "928917452707",
+    "project_id": "crossfitranker",
+    "storage_bucket": "crossfitranker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928917452707:android:2a7a567853ff8659384c16",
+        "android_client_info": {
+          "package_name": "com.eunho.crossfitranker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlxD1C-X753p_VjpEEOJzESR3BXJ4186U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
