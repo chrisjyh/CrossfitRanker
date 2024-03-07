@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_challenge">Challenge</string>
     <string name="title_mypage">My Page</string>
+    <string name="home_tab01">WOD</string>
+    <string name="home_tab02">FREE</string>
+    <string name="home_tab03">PERSONAL</string>
+
 </resources>
