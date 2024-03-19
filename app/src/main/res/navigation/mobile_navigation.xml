@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -9,7 +10,35 @@
         android:id="@+id/navigation_home"
         android:name="com.eunho.crossfitranker.view.fragment.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_wod"
+            app:destination="@id/navigation_home_wod" />
+        <action
+            android:id="@+id/action_navigation_home_to_personal"
+            app:destination="@id/navigation_home_personal" />
+        <action
+            android:id="@+id/action_navigation_home_to_free"
+            app:destination="@id/navigation_home_free" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_home_wod"
+        android:name="com.eunho.crossfitranker.view.fragment.home.WodFragment"
+        android:label="@string/home_tab01"
+        tools:layout="@layout/fragment_home_wod" />
+
+    <fragment
+        android:id="@+id/navigation_home_free"
+        android:name="com.eunho.crossfitranker.view.fragment.home.FreeFragment"
+        android:label="@string/home_tab02"
+        tools:layout="@layout/fragment_home_free" />
+
+    <fragment
+        android:id="@+id/navigation_home_personal"
+        android:name="com.eunho.crossfitranker.view.fragment.home.PersonalFragment"
+        android:label="@string/home_tab03"
+        tools:layout="@layout/fragment_home_personal" />
 
     <fragment
         android:id="@+id/navigation_challenge"

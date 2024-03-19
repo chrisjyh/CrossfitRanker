@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/itemPaddingHorizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:navigationIcon="@color/white"
+            app:title="@string/sample_wod_title"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/tv_wod_board"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="30dp"
+        android:text="@string/sample_wod"
+        app:layout_constraintTop_toBottomOf="@+id/topAppBarLayout"
+        tools:ignore="NotSibling" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_all"
+        android:layout_marginStart="@dimen/margin_start_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wod_board"
+        android:text="@string/chip_all"
+        tools:ignore="MissingConstraints" />
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_rxd"
+        android:layout_marginStart="@dimen/margin_start_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wod_board"
+        app:layout_constraintStart_toEndOf="@+id/chip_all"
+        android:text="@string/chip_rxd"
+        tools:ignore="MissingConstraints,NotSibling"
+        app:layout_constraintBaseline_toBaselineOf="@+id/chip_all"/>
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_man"
+        android:layout_marginStart="@dimen/margin_start_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wod_board"
+        app:layout_constraintStart_toEndOf="@+id/chip_rxd"
+        android:text="@string/chip_man"
+        tools:ignore="MissingConstraints,NotSibling"
+        app:layout_constraintBaseline_toBaselineOf="@+id/chip_all"/>
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_woman"
+        android:layout_marginStart="@dimen/margin_start_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wod_board"
+        app:layout_constraintStart_toEndOf="@+id/chip_man"
+        android:text="@string/chip_woman"
+        tools:ignore="MissingConstraints,NotSibling"
+        app:layout_constraintBaseline_toBaselineOf="@+id/chip_all"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/chip_all"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/item_ranking"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

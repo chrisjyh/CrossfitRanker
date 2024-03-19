@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="itemPaddingHorizontal">20dp</dimen>
+    <dimen name="itemPaddingVertical">15dp</dimen>
+    <dimen name="font_title">20dp</dimen>
+    <dimen name="font_grade">18dp</dimen>
+    <dimen name="font_content">15dp</dimen>
+    <dimen name="item_item_margin_top_small">10dp</dimen>
+    <dimen name="item_item_margin_top_normal">15dp</dimen>
+    <dimen name="item_item_margin_top_large">30dp</dimen>
+    <dimen name="margin_start_small">10dp</dimen>
+    <dimen name="margin_bottom_large">15dp</dimen>
+
+</resources>

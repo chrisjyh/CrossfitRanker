@@ -6,5 +6,33 @@
     <string name="home_tab01">WOD</string>
     <string name="home_tab02">FREE</string>
     <string name="home_tab03">PERSONAL</string>
+    <string name="mypage_dashboard_title">DASHBOARD</string>
+    <string name="mypage_lb_kg_title">LB TO KG</string>
+    <string name="mypage_my_rank_title">참여한 와드</string>
+    <string name="mypage_change_code_title">박스코드 변경</string>
+
+    <string name="chip_all">ALL</string>
+    <string name="chip_rxd">RXD</string>
+    <string name="chip_scaled">scaled</string>
+    <string name="chip_man">man</string>
+    <string name="chip_woman">woman</string>
+
+    <string name="lb_lb">LB</string>
+    <string name="lb_kg">KG</string>
+    <string name="lb_code">CODE</string>
+
+    <string name="btn_change_code">코드 변경</string>
+    <string name="btn_record">기록 등록</string>
+
+    <string name="sample_record">등수 : 1st \n 점수 : 2000</string>
+    <string name="sample_wod_title">24.03.08 CROSSFIT WOD</string>
+    <string name="sample_wod">As many rounds and reps as possible in 20 minutes of:/n 300-meter row/n 10 deadlifts/n 50 double-unders/n /n/n Post rounds and reps completed to comments and submit your results as part of the 2024 CrossFit Open/n ♀ 125 lb/n ♂ 185 lb</string>
+    <string name="sample_ranking_item_title">주은호</string>
+    <string name="sample_ranking_record">점수 : 2000</string>
+    <string name="sample_ranking_grade">1st</string>
+    <string name="sample_description_squat">SQUAT</string>
+    <string name="sample_challenge_item_title">SQUAT 1MIN</string>
+    <string name="sample_challenge_item_content">1분동안 최대한 많은 스쿼트를 수행</string>
+    <string name="sample_challenge_item_record">1등 기록 : 100 \n 나의 기록 : 11</string>
 
 </resources>
