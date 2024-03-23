@@ -35,4 +35,6 @@
     <string name="sample_challenge_item_content">1분동안 최대한 많은 스쿼트를 수행</string>
     <string name="sample_challenge_item_record">1등 기록 : 100 \n 나의 기록 : 11</string>
 
+    <string name="btn_description">와드 등록 버튼</string>
+    <string name="btn_squat_challenge_start">스쿼트 시작</string>
 </resources>

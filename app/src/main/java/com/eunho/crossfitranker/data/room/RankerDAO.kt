@@ -8,12 +8,20 @@ import com.eunho.crossfitranker.data.WodRecord
 
 @Dao
 interface RankerDAO {
-//    @Query("""
-//
-//    """)
-//    fun getLocalWod(): List<WodRecord>
-
     @Transaction
     @Insert
     fun insertWod(wod: Wod)
+
+
+    @Query("""
+        select 
+            w.wod_id as "wod_id",
+            w.wod_title as "wod_title",
+            r.record as "record"
+        from wod w
+        left join record r
+            on w.wod_id = r.wod_id
+        order by w.reg_date DESC
+    """)
+    fun findAllPersonalRecord():List<PersonalRecord>
 }

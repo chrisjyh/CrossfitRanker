@@ -11,11 +11,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.eunho.crossfitranker.common.RoomDataResult
+import com.eunho.crossfitranker.common.WodType
+import com.eunho.crossfitranker.common.ioDispatchers
+import com.eunho.crossfitranker.data.room.Wod
 import com.eunho.crossfitranker.databinding.FragmentHomePersonalBinding
 import com.eunho.crossfitranker.repository.RoomRepository
+import com.eunho.crossfitranker.view.adaptor.PersonalListAdaptor
 import com.eunho.crossfitranker.view.fragment.BaseFragment
 import com.eunho.crossfitranker.view.viewmodel.HomePersonalViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class PersonalFragment : BaseFragment<FragmentHomePersonalBinding>(
@@ -23,6 +30,7 @@ class PersonalFragment : BaseFragment<FragmentHomePersonalBinding>(
 ) {
 
     private val personalViewModel: HomePersonalViewModel by viewModels()
+    private lateinit var personalListAdaptor: PersonalListAdaptor
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,13 +38,47 @@ class PersonalFragment : BaseFragment<FragmentHomePersonalBinding>(
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
+        personalListAdaptor = PersonalListAdaptor()
 
+        return binding.root
+    }
+    override fun onViewCreated() {
+        collectFlow()
+        personalViewModel.findAllWodList()
+        recyclerSetup()
+    }
+
+    fun insertWod() {
+        Log.e("test","insert wod fragment")
+        val sample = Wod(
+            "12min",
+            "20240329 CF wod",
+            """ pull up 100
+                push up 100
+                sit up 100
+            """.trimIndent(),
+            "${WodType.AMRAP}"
+            )
+        lifecycleScope.launch {
+            personalViewModel.insertRecord(sample)
+        }
+    }
+
+    private fun recyclerSetup() {
+
+        with(binding.lvWod) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = personalListAdaptor
+        }
+    }
+
+    private fun collectFlow() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                personalViewModel.PersonalWodResult.collect {
+                personalViewModel.personalRecordList.collectLatest {
                     when (it) {
                         is RoomDataResult.Success -> {
-
+                            personalListAdaptor.setProductList(it.resultData)
                         }
 
                         is RoomDataResult.Error -> {
@@ -44,7 +86,7 @@ class PersonalFragment : BaseFragment<FragmentHomePersonalBinding>(
                         }
 
                         is RoomDataResult.NoConstructor -> {
-                            Log.e("test","data 입력 필요")
+                            Log.e("test", "no data")
                         }
 
                         else -> {
@@ -54,10 +96,5 @@ class PersonalFragment : BaseFragment<FragmentHomePersonalBinding>(
                 }
             }
         }
-
-        return binding.root
-    }
-    override fun onViewCreated() {
-        Log.e("test","home - personal")
     }
 }

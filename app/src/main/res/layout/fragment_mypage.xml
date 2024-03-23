@@ -44,7 +44,7 @@
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_mypage_lb"
+        android:id="@+id/til_mypage_lb"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/lb_lb"
@@ -54,12 +54,14 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_mypage_lb"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_mypage_kg"
+        android:id="@+id/til_mypage_kg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/lb_kg"
@@ -69,8 +71,10 @@
         app:layout_constraintHorizontal_bias="0.45">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_mypage_kg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -82,7 +86,7 @@
         android:layout_marginBottom="30dp"
         android:text="@string/mypage_change_code_title"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/et_mypage_lb"
+        app:layout_constraintTop_toBottomOf="@id/til_mypage_lb"
         tools:ignore="MissingConstraints"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -96,6 +100,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_change_code">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_mypage_code_change"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -126,8 +131,5 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_my_rank_title"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_wod"/>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

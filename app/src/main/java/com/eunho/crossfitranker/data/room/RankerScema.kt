@@ -5,10 +5,9 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.eunho.crossfitranker.common.WodType
 import com.eunho.crossfitranker.common.getCurrentDateTimeAsString
 
-@Entity(tableName="wod_info")
+@Entity(tableName="wod")
 class Wod {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "wod_id")
@@ -58,10 +57,12 @@ class Record {
     var wodId: Int = 0
     @ColumnInfo(name="record")
     var record: String = ""
+    @ColumnInfo(name = "reg_date")
+    var regDate: String = ""
 }
 
-data class PersonalRecordRecycler(
+data class PersonalRecord(
     @ColumnInfo(name = "wod_id") var wodId: Int,
     @ColumnInfo(name = "wod_title") var title: String,
-    @ColumnInfo(name = "record") var record: String
+    @ColumnInfo(name = "record") var record: String?
 )

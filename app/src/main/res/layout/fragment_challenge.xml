@@ -13,9 +13,18 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:dividerHeight="@dimen/item_item_margin_top_small"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_squat_start"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="InvalidId"
         tools:listitem="@layout/item_challenge_card" />
+
+    <Button
+        android:id="@+id/btn_squat_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_squat_challenge_start"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
