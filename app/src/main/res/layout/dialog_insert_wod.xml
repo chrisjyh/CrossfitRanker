@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_dialog_wod_insert"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:paddingHorizontal="@dimen/itemPaddingHorizontal">
+
+        <TextView
+            android:id="@+id/tv_wod_insert_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_insert_wod_title"
+            android:textSize="@dimen/font_title"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_wod_type_wrap"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/insert_wod_type_hint"
+            app:layout_constraintTop_toBottomOf="@+id/tv_wod_insert_title">
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_amrap"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/wod_type_amrap"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_emom"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wod_type_emom"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_fortime"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wod_type_fortime"/>
+        </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_wod_time_cap_wrap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/insert_wod_timecap_hint"
+            app:layout_constraintTop_toBottomOf="@+id/chip_wod_type_wrap"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_wod_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_wod_title_wrap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/insert_wod_title_hint"
+            app:layout_constraintTop_toBottomOf="@+id/et_wod_time_cap_wrap"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_wod_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_wod_wrap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/insert_wod_hint"
+            app:layout_constraintTop_toBottomOf="@+id/et_wod_title_wrap"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_wod"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/btn_enroll_wod"
+            android:layout_marginHorizontal="@dimen/itemPaddingVertical"
+            android:layout_marginTop="@dimen/item_item_margin_top_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_insert_record"
+            app:layout_constraintTop_toBottomOf="@+id/et_wod_wrap"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
