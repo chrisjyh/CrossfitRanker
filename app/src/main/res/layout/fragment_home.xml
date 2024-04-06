@@ -19,24 +19,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home_tab01"
-            android:icon="@android:color/background_dark"
+            android:icon="@drawable/ic_home_wod"
             />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home_tab02"
-            android:icon="@android:color/background_dark"
+            android:icon="@drawable/ic_home_free"
             />
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home_tab03"
-            android:icon="@android:color/background_dark"
+            android:icon="@drawable/ic_home_personal"
             />
     </com.google.android.material.tabs.TabLayout>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
@@ -46,8 +46,7 @@
         app:defaultNavHost="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:ignore="FragmentTagUsage"
-        />
+        tools:ignore="FragmentTagUsage" />
 
 
 

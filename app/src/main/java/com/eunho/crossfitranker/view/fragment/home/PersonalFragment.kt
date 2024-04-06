@@ -13,6 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eunho.crossfitranker.common.DIALOGINSERTWOD
+import com.eunho.crossfitranker.common.HOMEFREE
+import com.eunho.crossfitranker.common.HOMEPERSINAL
 import com.eunho.crossfitranker.common.RoomDataResult
 import com.eunho.crossfitranker.common.WodType
 import com.eunho.crossfitranker.common.ioDispatchers
@@ -39,6 +42,9 @@ class PersonalFragment : BaseFragment<FragmentHomePersonalBinding>(
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         personalListAdaptor = PersonalListAdaptor()
+        binding.btnEnrollWod.setOnClickListener{
+            WodInsertDialog(HOMEPERSINAL).show(childFragmentManager, DIALOGINSERTWOD)
+        }
 
         return binding.root
     }
@@ -49,7 +55,6 @@ class PersonalFragment : BaseFragment<FragmentHomePersonalBinding>(
     }
 
     fun insertWod() {
-        Log.e("test","insert wod fragment")
         val sample = Wod(
             "12min",
             "20240329 CF wod",
@@ -81,9 +86,7 @@ class PersonalFragment : BaseFragment<FragmentHomePersonalBinding>(
                             personalListAdaptor.setProductList(it.resultData)
                         }
 
-                        is RoomDataResult.Error -> {
-
-                        }
+                        is RoomDataResult.Error -> {}
 
                         is RoomDataResult.NoConstructor -> {
                             Log.e("test", "no data")

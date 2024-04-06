@@ -5,9 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eunho.crossfitranker.common.DIALOGINSERTWOD
+import com.eunho.crossfitranker.common.WODCOLLECT
 import com.eunho.crossfitranker.databinding.FragmentHomeWodBinding
 import com.eunho.crossfitranker.view.adaptor.WodRecyclerListAdaptor
 import com.eunho.crossfitranker.view.fragment.BaseFragment
@@ -20,7 +23,7 @@ class WodFragment : BaseFragment<FragmentHomeWodBinding>(
 
     private val homeWodViewModel: HomeWodViewModel by viewModels()
     private val wodRecyclerViewAdaptor: WodRecyclerListAdaptor by lazy {
-        WodRecyclerListAdaptor()
+        WodRecyclerListAdaptor(childFragmentManager)
     }
 
     override fun onCreateView(
@@ -32,11 +35,23 @@ class WodFragment : BaseFragment<FragmentHomeWodBinding>(
 
         with(binding){
             btnEnrollWod.setOnClickListener{
-                Log.e("test","clicked")
-                homeWodViewModel.viewModelScope.launch{
-                    homeWodViewModel.insetSampleData()
-                }
+                WodInsertDialog(WODCOLLECT).show(childFragmentManager, DIALOGINSERTWOD)
             }
+
+            // 검색창
+            searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    if (query != null) {
+                        searchWod(query)
+                    }else{
+                        homeWodViewModel.wodListData()
+                    }
+                    return true
+                }
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return true
+                }
+            })
         }
 
         return binding.root
@@ -59,13 +74,13 @@ class WodFragment : BaseFragment<FragmentHomeWodBinding>(
     private fun observeWodList(){
         // 리뷰 리스트
         homeWodViewModel.wodLiveData.observe(viewLifecycleOwner){
-            if(it.isEmpty()){
-                Log.e("test","empty")
-            }else{
-                wodRecyclerViewAdaptor.submitList(it)
-            }
+            wodRecyclerViewAdaptor.submitList(it)
         }
+    }
 
+    // 와드 검색
+    private fun searchWod(query: String){
+        homeWodViewModel.searchWods(query)
     }
 
 }

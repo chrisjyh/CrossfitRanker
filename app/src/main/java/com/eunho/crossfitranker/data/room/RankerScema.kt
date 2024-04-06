@@ -5,25 +5,30 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.eunho.crossfitranker.common.DATATIMECAP
+import com.eunho.crossfitranker.common.DATAWODTYPE
+import com.eunho.crossfitranker.common.WODCOLLECT
+import com.eunho.crossfitranker.common.WODID
 import com.eunho.crossfitranker.common.getCurrentDateTimeAsString
+import org.apache.commons.lang3.StringUtils
 
-@Entity(tableName="wod")
+@Entity(tableName= WODCOLLECT)
 class Wod {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "wod_id")
+    @ColumnInfo(name = WODID)
     var wodId: Int = 0
 
-    @ColumnInfo(name = "wod_type")
-    var wodType: String = ""
+    @ColumnInfo(name = DATAWODTYPE)
+    var wodType: String = StringUtils.EMPTY
 
-    @ColumnInfo(name = "time_cap")
-    var timeCap: String = ""
+    @ColumnInfo(name = DATATIMECAP)
+    var timeCap: String = StringUtils.EMPTY
 
     @ColumnInfo(name = "wod_title")
-    var title: String = ""
+    var title: String = StringUtils.EMPTY
 
     @ColumnInfo(name = "wod")
-    var wod: String = ""
+    var wod: String = StringUtils.EMPTY
 
     @ColumnInfo(name = "reg_date")
     var regDate: String = getCurrentDateTimeAsString()

@@ -31,18 +31,9 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(
             homeTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?){
                     when(tab?.position){
-                        0 -> {
-//                            findNavController().navigate(R.id.navigation_home_wod)
-                            replaceFragment(wodFragment)
-                        }
-                        1 -> {
-//                            findNavController().navigate(R.id.navigation_home_free)
-                            replaceFragment(freeFragment)
-                        }
-                        2 -> {
-                            replaceFragment(personalFragment)
-//                            findNavController().navigate(R.id.navigation_home_personal)
-                        }
+                        0 -> { replaceFragment(wodFragment) }
+                        1 -> { replaceFragment(freeFragment) }
+                        2 -> { replaceFragment(personalFragment) }
                     }
                 }
 
@@ -55,18 +46,16 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(
         replaceFragment(wodFragment)
         return binding.root
     }
+    override fun onViewCreated() {}
 
-    // 프레그먼트 교체 함수
+    // 프레그먼트 교체
     private fun replaceFragment(fragment: Fragment) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .commit()
-    }
-    override fun onViewCreated() {
-        Log.e("test","home")
-    }
+        val transition = requireActivity().supportFragmentManager.beginTransaction()
 
-
+        transition.replace(R.id.fragment_container, fragment)
+        transition.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        transition.addToBackStack(fragment.toString())
+        transition.commit()
+    }
 }
 

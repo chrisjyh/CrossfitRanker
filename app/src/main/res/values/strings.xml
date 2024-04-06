@@ -6,10 +6,17 @@
     <string name="home_tab01">WOD</string>
     <string name="home_tab02">FREE</string>
     <string name="home_tab03">PERSONAL</string>
-    <string name="mypage_dashboard_title">DASHBOARD</string>
+    <string name="wod_detail">WOD DETAIL</string>
+    <string name="mypage_dashboard_title">MY PAGE</string>
     <string name="mypage_lb_kg_title">LB TO KG</string>
     <string name="mypage_my_rank_title">참여한 와드</string>
-    <string name="mypage_change_code_title">박스코드 변경</string>
+    <string name="mypage_change_code_title">코드 변경</string>
+    <string name="wod_type_amrap">AMRAP</string>
+    <string name="wod_type_emom">EMOM</string>
+    <string name="wod_type_fortime">FORTIME</string>
+
+    <string name="dialog_record_hint">기록을 입력 하세요</string>
+    <string name="tv_dialog_record">기록 작성</string>
 
     <string name="chip_all">ALL</string>
     <string name="chip_rxd">RXD</string>
@@ -20,9 +27,19 @@
     <string name="lb_lb">LB</string>
     <string name="lb_kg">KG</string>
     <string name="lb_code">CODE</string>
+    <string name="lb_user">nickname</string>
 
-    <string name="btn_change_code">코드 변경</string>
-    <string name="btn_record">기록 등록</string>
+    <string name="title_insert_wod_title">와드 등록</string>
+    <string name="insert_wod_type_hint">와드 타입</string>
+    <string name="insert_wod_timecap_hint">time cap</string>
+    <string name="insert_wod_title_hint">와드 제목</string>
+    <string name="insert_wod_hint">와드 내용</string>
+
+    <string name="btn_change_code">CHANGE</string>
+    <string name="btn_record">RECORD</string>
+    <string name="btn_insert_record">SUBMIT</string>
+    <string name="btn_description">ENROLL WOD</string>
+    <string name="btn_squat_challenge_start">START</string>
 
     <string name="sample_record">등수 : 1st \n 점수 : 2000</string>
     <string name="sample_wod_title">24.03.08 CROSSFIT WOD</string>
@@ -34,7 +51,4 @@
     <string name="sample_challenge_item_title">SQUAT 1MIN</string>
     <string name="sample_challenge_item_content">1분동안 최대한 많은 스쿼트를 수행</string>
     <string name="sample_challenge_item_record">1등 기록 : 100 \n 나의 기록 : 11</string>
-
-    <string name="btn_description">와드 등록 버튼</string>
-    <string name="btn_squat_challenge_start">스쿼트 시작</string>
 </resources>

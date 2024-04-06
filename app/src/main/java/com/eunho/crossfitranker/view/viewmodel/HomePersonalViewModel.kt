@@ -23,7 +23,6 @@ class HomePersonalViewModel: ViewModel(){
     val personalRecordList get() = _personalRecord.asStateFlow()
 
     fun findAllWodList() = viewModelScope.launch {
-        Log.e("test","in find all wod List")
         withContext(ioDispatchers.coroutineContext) {
             repository.findAllPersonalRecord().collect {
                 _personalRecord.value = it
@@ -32,10 +31,8 @@ class HomePersonalViewModel: ViewModel(){
     }
     fun insertRecord(wod: Wod) {
         viewModelScope.launch {
-            Log.e("test","insert wod")
-            ioDispatchers.launch {
                 repository.insertWod(wod)
-            }
+
         }
     }
 

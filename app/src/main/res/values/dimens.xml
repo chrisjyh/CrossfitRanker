@@ -11,4 +11,6 @@
     <dimen name="margin_start_small">10dp</dimen>
     <dimen name="margin_bottom_large">15dp</dimen>
 
+    <dimen name="ic_small_btn">24dp</dimen>
+
 </resources>

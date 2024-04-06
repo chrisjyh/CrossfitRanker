@@ -18,7 +18,7 @@ class PersonalListAdaptor:
 
     private var wodList = emptyList<PersonalRecord>()
 
-    class PersonalViewHolder(val binding: ItemWodBinding) : RecyclerView.ViewHolder(binding.root)
+    class PersonalViewHolder(val binding: ItemWodBinding) : RecyclerView.ViewHolder(binding.root){}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonalViewHolder {
         return PersonalViewHolder(
@@ -34,6 +34,7 @@ class PersonalListAdaptor:
         with(holder.binding) {
             tvWodTitle.text = wod.title
             tvWodRecord.text = wod.record
+
         }
     }
 

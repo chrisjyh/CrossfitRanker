@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.challenge.ChallengeFragment">
 
+    <TextView
+        android:id="@+id/tv_challenge"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/title_challenge"
+        android:textSize="25dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lv_wod"
         android:layout_width="match_parent"
@@ -14,7 +24,7 @@
         android:layout_marginTop="20dp"
         android:dividerHeight="@dimen/item_item_margin_top_small"
         app:layout_constraintBottom_toBottomOf="@+id/btn_squat_start"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_challenge"
         tools:ignore="InvalidId"
         tools:listitem="@layout/item_challenge_card" />
 

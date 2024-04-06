@@ -1,24 +1,34 @@
 package com.eunho.crossfitranker.view.adaptor
 
+import android.R
+import android.R.attr.fragment
 import android.annotation.SuppressLint
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.eunho.crossfitranker.data.WodRecord
+import com.eunho.crossfitranker.common.DIALOGWODRECORD
+import com.eunho.crossfitranker.data.firebase.WodRecordTitle
 import com.eunho.crossfitranker.databinding.ItemWodBinding
+import com.eunho.crossfitranker.view.fragment.home.WodDetailDialog
+import com.eunho.crossfitranker.view.fragment.home.WodRecordDialog
 
-class WodRecyclerListAdaptor: ListAdapter<WodRecord, RecyclerView.ViewHolder>(WodDiffCallback) {
+
+class WodRecyclerListAdaptor(
+    private val fragmentManager: FragmentManager
+): ListAdapter<WodRecordTitle, RecyclerView.ViewHolder>(WodDiffCallback) {
 
     companion object {
-        val WodDiffCallback = object : DiffUtil.ItemCallback<WodRecord>() {
-            override fun areItemsTheSame(oldItem: WodRecord, newItem: WodRecord): Boolean {
+        val WodDiffCallback = object : DiffUtil.ItemCallback<WodRecordTitle>() {
+            override fun areItemsTheSame(oldItem: WodRecordTitle, newItem: WodRecordTitle): Boolean {
                 return oldItem.wodId == newItem.wodId
             }
-            override fun areContentsTheSame(oldItem: WodRecord, newItem: WodRecord): Boolean {
+            override fun areContentsTheSame(oldItem: WodRecordTitle, newItem: WodRecordTitle): Boolean {
                 return oldItem == newItem
             }
         }
@@ -36,7 +46,7 @@ class WodRecyclerListAdaptor: ListAdapter<WodRecord, RecyclerView.ViewHolder>(Wo
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(holder is WodViewHolder){
-            val wodRecord = getItem(position) as WodRecord
+            val wodRecord = getItem(position) as WodRecordTitle
             holder.bind(wodRecord)
         }
     }
@@ -46,33 +56,56 @@ class WodRecyclerListAdaptor: ListAdapter<WodRecord, RecyclerView.ViewHolder>(Wo
     inner class WodViewHolder(
         private val binding: ItemWodBinding
     ) : RecyclerView.ViewHolder(binding.root){
-        @SuppressLint("SetTextI18n")
-        fun bind(data: WodRecord){
+        @SuppressLint("SetTextI18n", "CommitTransaction")
+        fun bind(data: WodRecordTitle){
             with(binding){
+                // 다이얼 로그 프레그 먼트 생성
+                root.setOnClickListener{
+                    val wodDetailDialog = WodDetailDialog(data.wodId)
+
+                    if (!fragmentManager.isDestroyed) {
+                        wodDetailDialog.show(fragmentManager, "wodDetailDialog")
+                    } else{
+                        // ToDo 프레그먼트가 파괴되었을때 재생성
+                        fragmentManager.beginTransaction()
+                    }
+                }
                 tvWodTitle.text = data.wodTitle
 
-                if(data.record.isEmpty()){
+                if(data.myRecords.isEmpty()){
                     tvWodRecord.visibility = View.GONE
                     btnEnrollRecord.visibility = View.VISIBLE
 
+                    // 기록 등록
                     btnEnrollRecord.setOnClickListener{
-                        // data.wodId 전달 해서 입력 하게 해야 하것지?
-                        // todo 바텀 시트로 기록 입력 하게 해야함 || 그냥 인풋 영역 나오게?
-                        Log.e("test","scoreInput clicked")
+                        val recordDialog = WodRecordDialog(data.wodId)
+                        recordDialog.show(fragmentManager, DIALOGWODRECORD)
                     }
                 }else{
                     tvWodRecord.visibility = View.VISIBLE
                     btnEnrollRecord.visibility = View.GONE
 
                     tvWodRecord.text = """
-                    등수: ${data.record[0].record}
-                    점수: ${data.record[0].score}
+                    등수: ${data.myRecords[0].ranking}
+                    점수: ${data.myRecords[0].record}
                 """.trimIndent()
                 }
+
+                // 리스트 상단 선
+                val divider = View(itemView.context)
+                divider.layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    1
+                )
+                divider.setBackgroundColor(itemView.context.resources.getColor(R.color.background_dark))
+
+                root.addView(divider)
 
             }
         }
     }
+
+
 
 }
 

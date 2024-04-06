@@ -8,11 +8,11 @@
 
     <item
         android:id="@+id/navigation_challenge"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/ic_challenge"
         android:title="@string/title_challenge" />
 
     <item
         android:id="@+id/navigation_mypage"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/ic_mypage"
         android:title="@string/title_mypage" />
 </menu>

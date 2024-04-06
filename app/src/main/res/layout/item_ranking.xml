@@ -12,7 +12,7 @@
         android:id="@+id/tv_ranking_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sample_ranking_item_title"
+        tools:text="@string/sample_ranking_item_title"
         android:textSize="@dimen/font_title"
         tools:ignore="MissingConstraints,SpUsage" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/tv_ranking_item_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sample_ranking_record"
+        tools:text="@string/sample_ranking_record"
         android:textSize="@dimen/font_content"
         app:layout_constraintTop_toBottomOf="@+id/tv_ranking_item_title"
         tools:ignore="MissingConstraints,SpUsage" />
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:text="@string/sample_ranking_grade"
+        tools:text="@string/sample_ranking_grade"
         android:textSize="@dimen/font_title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,109 +1,202 @@
 package com.eunho.crossfitranker.data.firebase
 
+import android.annotation.SuppressLint
 import android.util.Log
-import com.eunho.crossfitranker.common.FireBaseDataResult
+import com.eunho.crossfitranker.common.CURRENTBOX
+import com.eunho.crossfitranker.common.DATAPARTNER
+import com.eunho.crossfitranker.common.DATAREGDATA
+import com.eunho.crossfitranker.common.DATATIMECAP
+import com.eunho.crossfitranker.common.DATATITLE
+import com.eunho.crossfitranker.common.DATAUSERID
+import com.eunho.crossfitranker.common.DATAWOD
+import com.eunho.crossfitranker.common.DATAWODTYPE
+import com.eunho.crossfitranker.common.FIELDGROUPCODE
+import com.eunho.crossfitranker.common.RECORD
 import com.eunho.crossfitranker.common.USER
+import com.eunho.crossfitranker.common.USERID
+import com.eunho.crossfitranker.common.WODCOLLECT
+import com.eunho.crossfitranker.common.WODID
 import com.eunho.crossfitranker.common.getCurrentDateTimeAsString
 import com.eunho.crossfitranker.common.ioDispatchers
-import com.eunho.crossfitranker.data.MyRecord
-import com.eunho.crossfitranker.data.WodRecord
-import com.google.firebase.firestore.Filter
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import org.apache.commons.lang3.StringUtils
 
-const val TAG = "test"
 class FirebaseManger() {
 
     private val firebaseDB = Firebase.firestore
 
-    private val sampleData = arrayListOf<WodRecord>().apply {
-        add(WodRecord(1,"240316 crossfit wod 월", listOf(MyRecord(1,"100"))))
-        add(WodRecord(2,"240317 Ditefit wod 화", listOf(MyRecord(2,"50"))))
-        add(WodRecord(3,"240318 crossfit wod 수", listOf(MyRecord(3,"10"))))
-        add(WodRecord(9,"240319 crossfit wod 목", listOf()))
-        add(WodRecord(4,"240319 crossfit wod 목", listOf(MyRecord(4,"1010"))))
-        add(WodRecord(5,"240320 crossfit wod 금", listOf(MyRecord(1,"1220"))))
-        add(WodRecord(6,"240321 crossfit wod 토", listOf(MyRecord(3,"1100"))))
-        add(
-            WodRecord(7,"240323 crossfit wod 오늘은 아주 아주 힘드니 각오 하는게 좋을 겁니다 와드가 아주 기이이이이이일어요", listOf(
-                MyRecord(7,"1011")
-            ))
-        )
-        add(WodRecord(8,"240324 crossfit wod 일", listOf(MyRecord(1,"10313"))))
+    /**
+     * 와드 등록
+     * */
+    suspend fun insertWod(insetWod: WodInsertForm): String {
+        val documentId = firebaseDB.collection(WODCOLLECT)
+            .add(insetWod.toMap())
+            .await()
+        return documentId.id
     }
 
-    val insertSample = hashMapOf(
-        "title" to "240321 cf wod",
-        "wod" to """
-                5 Wall Walk
-                50 DU
-                15 KBS (24/16)
-                15/12Cal Machine
-            """.trimIndent(),
-        "time_cap" to "20min",
-        "reg_date" to getCurrentDateTimeAsString(),
-        "group_code" to "",
-        "wod_type" to "EMOM",
-        "partner" to 1
-    )
+    /**
+     * home -> wod -> 와드 제목 리스트
+     * */
+    @SuppressLint("SuspiciousIndentation")
+    suspend fun boxAllWod(): List<WodRecordTitle> {
+        val allWods = firebaseDB.collection(WODCOLLECT)
+            .whereEqualTo(FIELDGROUPCODE, CURRENTBOX)
+            .get()
+            .await()
+        val wodRecordList = withContext(ioDispatchers.coroutineContext){
+            val wodRecords = mutableListOf<WodRecordTitle>()
+                allWods.documents.map { wod ->
+                async {
+                    val recordDocument = getRecordRanking(wod.id)
 
-    fun insertWod() {
-        val documentId = firebaseDB.collection("wod")
-            .add(insertSample)
-            .addOnSuccessListener { documentReference ->
-                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w("TAG", "Error adding document", e)
-            }
+                    val myRecord = recordDocument.filter { it.userNickName == USER }
+
+                     wodRecords.add(
+                        WodRecordTitle(
+                            wodId = wod.id,
+                            wodTitle = wod.data!![DATATITLE].toString(),
+                            myRecords = myRecord,
+                            regDate = wod.data!![DATAREGDATA].toString()
+                        )
+                    )
+                }
+            }.awaitAll()
+            wodRecords.toList().sortedByDescending { it.regDate }
+        }
+        return wodRecordList
     }
 
-    suspend fun boxAllWod(box: String): ArrayList<WodRecord> {
+    /**
+     * home -> wod -> 와드 제목 리스트
+     * */
+    @SuppressLint("SuspiciousIndentation")
+    suspend fun freeAllWod(): List<WodRecordTitle> {
+        val allWods = firebaseDB.collection(WODCOLLECT)
+            .whereEqualTo(FIELDGROUPCODE, StringUtils.EMPTY)
+            .get()
+            .await()
+        val wodRecordList = withContext(ioDispatchers.coroutineContext){
+            val wodRecords = mutableListOf<WodRecordTitle>()
+            allWods.documents.map { wod ->
+                async {
+                    val recordDocument = getRecordRanking(wod.id)
 
-        val allWods = firebaseDB.collection("wod")
-            .whereEqualTo("group_code", box)
+                    val myRecord = recordDocument.filter { it.userNickName == USER }
+
+                    wodRecords.add(
+                        WodRecordTitle(
+                            wodId = wod.id,
+                            wodTitle = wod.data!![DATATITLE].toString(),
+                            myRecords = myRecord,
+                            regDate = wod.data!![DATAREGDATA].toString()
+                        )
+                    )
+                }
+            }.awaitAll()
+            wodRecords.toList().sortedByDescending { it.regDate }
+        }
+        return wodRecordList
+    }
+
+    /**
+     * 참여한 와드
+     * */
+    @SuppressLint("SuspiciousIndentation")
+    suspend fun joinedAllWod(): List<WodRecordTitle> {
+        val allWods = firebaseDB.collection(WODCOLLECT)
+            .get()
+            .await()
+        val wodRecordList = withContext(ioDispatchers.coroutineContext){
+            val wodRecords = mutableListOf<WodRecordTitle>()
+            allWods.documents.map { wod ->
+                async {
+                    val recordDocument = getRecordRanking(wod.id)
+
+                    val myRecord = recordDocument.filter { it.userNickName == USER }
+
+                    if(myRecord.isNotEmpty()){
+                        wodRecords.add(
+                            WodRecordTitle(
+                                wodId = wod.id,
+                                wodTitle = wod.data!![DATATITLE].toString(),
+                                myRecords = myRecord,
+                                regDate = wod.data!![DATAREGDATA].toString()
+                            )
+                        )
+                    }
+                }
+            }.awaitAll()
+            wodRecords.toList().sortedByDescending { it.regDate }
+        }
+        return wodRecordList
+    }
+
+    /**
+     * 검색와드
+     * */
+    suspend fun searchWod(query: String): List<WodRecordTitle> {
+        val wod = boxAllWod()
+
+        if(query.isEmpty()){
+            return wod
+        }
+
+        val filterWod = wod.filter {
+            query in it.wodTitle
+        }
+        return filterWod
+    }
+
+    /**
+     * 와드 정보
+     * */
+    suspend fun getWodInfo(wodId: String): WodInsertForm{
+        val wodInfo = firebaseDB.collection(WODCOLLECT)
+            .document(wodId)
             .get()
             .await()
 
-        val wodRecordList = withContext(ioDispatchers.coroutineContext){
-            allWods.documents.map { wod ->
-                async {
-                    val recordDocument = ownerInWodRecord(wod.id)
-                    Pair(wod, recordDocument)
-                }
-            }.awaitAll()
-        }
-
-        return sampleData
+        return WodInsertForm(
+            title = wodInfo.data?.get(DATATITLE).toString(),
+            wod = wodInfo.data?.get(DATAWOD).toString(),
+            timeCap = wodInfo.data?.get(DATATIMECAP).toString(),
+            regDate = wodInfo.data?.get(DATAREGDATA).toString(),
+            wodType = wodInfo.data?.get(DATAWODTYPE).toString(),
+            partner = wodInfo.data?.get(DATAPARTNER).toString(),
+        )
     }
 
-    private fun ownerInWodRecord(wodId: String) =
-        firebaseDB.collection("record")
-            .whereEqualTo("wod_id", wodId)
-            .whereEqualTo("user_id", USER)
-            .get()
+    /**
+     * 와드 상세 보기 랭킹
+     * */
+    suspend fun getRecordRanking(wodId: String): List<WodRankingRecord> {
 
-    fun findAllWod() = flow {
-        val allWods = firebaseDB.collection("wod")
+        val refWodRankingRecord = firebaseDB.collection(RECORD)
+            .whereEqualTo(WODID, wodId)
             .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data.get("title")}")
-//                    add(WodRecord(1,"240316 crossfit wod 월", listOf(MyRecord(1,"100"))))
+            .await()
 
-//                    WodRecord(document.id,document.data.get("title"),)
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
-        emit(FireBaseDataResult.Success(sampleData))
-    }.catch { exception -> FireBaseDataResult.Error(exception) }
+        val rankingRecords = refWodRankingRecord.documents.map {
+            WodRankingRecord(
+                ranking = 0,
+                record = it.data?.get(RECORD).toString(),
+                userNickName = it.data?.get(DATAUSERID).toString()
+            )
+        }.sortedByDescending { it.record.toInt() }
+
+        for (i in rankingRecords.indices) {
+            rankingRecords[i].ranking = i + 1
+        }
+
+        return rankingRecords
+    }
+
 
 }

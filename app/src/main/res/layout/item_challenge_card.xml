@@ -13,41 +13,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <!-- Media -->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/sample_description_squat"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/cv_challenge_item_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/cv_challenge_item_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sample_challenge_item_title"
-                android:textAppearance="?attr/textAppearanceTitleMedium"
-                />
-            <TextView
-                android:id="@+id/cv_challenge_item_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/sample_challenge_item_content" />
-            <TextView
-                android:id="@+id/cv_challenge_item_record"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/sample_challenge_item_record" />
+            android:text="@string/lb_user"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            />
+        <TextView
+            android:id="@+id/cv_challenge_item_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/sample_challenge_item_record" />
         </LinearLayout>
-    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

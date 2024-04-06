@@ -11,14 +11,3 @@ sealed class RoomDataResult<out T> {
     data class RoomDBError(val exception: Throwable) : RoomDataResult<Nothing>()
 
 }
-
-
-/**
- * firebase
- **/
-sealed class FireBaseDataResult<out T> {
-    data class Success<T>(val resultData: T) : FireBaseDataResult<T>()
-    data class Error(val exception: Throwable) : FireBaseDataResult<Nothing>()
-
-    data object NoConstructor : FireBaseDataResult<Nothing>()
-}
