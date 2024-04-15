@@ -48,7 +48,7 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(
     }
     override fun onViewCreated() {}
 
-    // 프레그먼트 교체
+    // fragment 교체
     private fun replaceFragment(fragment: Fragment) {
         val transition = requireActivity().supportFragmentManager.beginTransaction()
 

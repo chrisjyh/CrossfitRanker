@@ -34,6 +34,7 @@ class WodFragment : BaseFragment<FragmentHomeWodBinding>(
         super.onCreateView(inflater, container, savedInstanceState)
 
         with(binding){
+            // 바텀 다이얼 로그
             btnEnrollWod.setOnClickListener{
                 WodInsertDialog(WODCOLLECT).show(childFragmentManager, DIALOGINSERTWOD)
             }

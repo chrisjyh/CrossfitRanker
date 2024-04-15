@@ -90,14 +90,14 @@ class WodRecyclerListAdaptor(
                     점수: ${data.myRecords[0].record}
                 """.trimIndent()
                 }
-
+                
                 // 리스트 상단 선
                 val divider = View(itemView.context)
                 divider.layoutParams = ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     1
                 )
-                divider.setBackgroundColor(itemView.context.resources.getColor(R.color.background_dark))
+                divider.setBackgroundColor(itemView.context.resources.getColor(R.color.holo_purple))
 
                 root.addView(divider)
 

@@ -5,7 +5,7 @@
     <color name="dark_primary">#252525</color>
     <color name="dark_primary02">#6B7280</color>
     <color name="dark_primary03">#374151</color>
-    <color name="primary1">#0E9F6E</color>
-    <color name="primary2">#31C48D</color>
+    <color name="primary_green">#0E9F6E</color>
+    <color name="primary_green_white">#31C48D</color>
     <color name="primary3">#BBD660</color>
 </resources>
