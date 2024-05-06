@@ -2,7 +2,6 @@ package com.eunho.crossfitranker.common
 
 import android.annotation.SuppressLint
 import android.graphics.PointF
-import android.util.Log
 import android.widget.TextView
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
@@ -13,8 +12,12 @@ import com.google.mlkit.vision.pose.PoseLandmark
 import kotlin.math.acos
 import kotlin.math.sqrt
 
+/**
+ * 포즈 감지 기능
+ */
 @ExperimentalGetImage
 class PoseAnalyzer(
+    // 카메라 감지
     private val detector: PoseDetector,
     private val squatShow: TextView
 ) : ImageAnalysis.Analyzer {
@@ -46,6 +49,7 @@ class PoseAnalyzer(
         if (mediaImage != null) {
             val inputImage = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
+            // 스쿼트 감지 로직
             detector.process(inputImage)
                 .addOnSuccessListener { pose ->
                     val leftHip = pose.getPoseLandmark(PoseLandmark.LEFT_HIP)

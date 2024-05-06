@@ -5,6 +5,9 @@ import android.view.ViewGroup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
+/**
+ * 태그 및 파일명
+ */
 typealias FragmentInflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
 const val MYPAGE = "mypage"
@@ -37,6 +40,14 @@ const val DIALOGINSERTWOD = "insertWod"
 const val RANERDB = "Ranker.db"
 const val PATHDB = "database/Ranker.db"
 
+const val CURRENTBOX = "whalemia"
+const val USER = "eunho"
+
+const val SUCCESS = "successs"
+const val FAIL = "fail"
+const val EMPTY = "empty"
+
+// 와드 종류
 enum class WodType {
     AMRAP,
     FORTIME,
@@ -44,6 +55,3 @@ enum class WodType {
 }
 
 val ioDispatchers = CoroutineScope(Dispatchers.IO)
-
-const val CURRENTBOX = "whalemia"
-const val USER = "eunho"

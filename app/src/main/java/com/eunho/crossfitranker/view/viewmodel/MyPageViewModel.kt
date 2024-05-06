@@ -9,6 +9,10 @@ import com.eunho.crossfitranker.data.firebase.WodRecordTitle
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
+/**
+ * 마이 페이지 뷰모델
+ * */
 class MyPageViewModel: ViewModel(){
     private val firebaseManager by lazy {
         FirebaseManger()
@@ -23,6 +27,4 @@ class MyPageViewModel: ViewModel(){
             joinWodList.postValue(wodList)
         }
     }
-
-
 }

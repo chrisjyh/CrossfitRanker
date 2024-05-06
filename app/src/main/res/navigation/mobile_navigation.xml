@@ -27,9 +27,6 @@
         android:name="com.eunho.crossfitranker.view.fragment.home.WodFragment"
         android:label="@string/home_tab01"
         tools:layout="@layout/fragment_home_wod" >
-        <action
-            android:id="@+id/action_navigation_home_wod_to_navigation_wod_detail"
-            app:destination="@id/navigation_wod_detail" />
     </fragment>
 
     <fragment
@@ -37,9 +34,6 @@
         android:name="com.eunho.crossfitranker.view.fragment.home.FreeFragment"
         android:label="@string/home_tab02"
         tools:layout="@layout/fragment_home_free" >
-        <action
-            android:id="@+id/action_navigation_home_free_to_navigation_wod_detail"
-            app:destination="@id/navigation_wod_detail" />
     </fragment>
 
     <fragment
@@ -47,16 +41,23 @@
         android:name="com.eunho.crossfitranker.view.fragment.home.PersonalFragment"
         android:label="@string/home_tab03"
         tools:layout="@layout/fragment_home_personal" >
-        <action
-            android:id="@+id/action_navigation_home_personal_to_navigation_wod_detail"
-            app:destination="@id/navigation_wod_detail" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_challenge"
         android:name="com.eunho.crossfitranker.view.fragment.challenge.ChallengeFragment"
         android:label="@string/title_challenge"
-        tools:layout="@layout/fragment_challenge" />
+        tools:layout="@layout/fragment_challenge" >
+        <action
+            android:id="@+id/action_navigation_challenge_to_navigation_challenge_camera"
+            app:destination="@id/navigation_challenge_camera" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_challenge_camera"
+        android:name="com.eunho.crossfitranker.view.fragment.challenge.ChallengeCameraFragment"
+        android:label= "@string/title_challenge"
+        tools:layout="@layout/fragment_challenge_camera" />
 
     <fragment
         android:id="@+id/navigation_mypage"
@@ -64,10 +65,5 @@
         android:label="@string/title_mypage"
         tools:layout="@layout/fragment_mypage" />
 
-    <fragment
-        android:id="@+id/navigation_wod_detail"
-        android:name="com.eunho.crossfitranker.view.fragment.home.WodDetailFragment"
-        android:label="@string/wod_detail"
-        tools:layout="@layout/dialog_fragment_wod_detail"
-        />
+
 </navigation>

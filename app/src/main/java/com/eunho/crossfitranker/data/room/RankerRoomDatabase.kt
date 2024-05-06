@@ -11,6 +11,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * room entity 등록 및 생성
+ * */
 @Database(
     entities = [
         Wod::class,
@@ -21,9 +24,8 @@ import kotlinx.coroutines.launch
 abstract class RankerRoomDatabase : RoomDatabase(){
     abstract fun generateDAO(): RankerDAO
     companion object{
-        @Volatile
-        private var instance: RankerRoomDatabase? = null
 
+        private var instance: RankerRoomDatabase? = null
         fun getInstance(context: Context): RankerRoomDatabase {
             return instance ?: synchronized(this){
                 instance ?: buildDatabase(context).also{
@@ -40,6 +42,10 @@ abstract class RankerRoomDatabase : RoomDatabase(){
         }
     }
 }
+
+/**
+ * Room 생성후 콜백
+ * */
 class RankerRoomCallback(private val context: Context): RoomDatabase.Callback(){
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)

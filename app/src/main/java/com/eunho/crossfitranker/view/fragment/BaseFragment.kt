@@ -9,6 +9,10 @@ import androidx.viewbinding.ViewBinding
 import com.eunho.crossfitranker.common.FragmentInflate
 
 
+/**
+ * 기본 프레그 먼트
+ * Fragment 생성시 상속
+ * */
 abstract class BaseFragment<VB : ViewBinding>(
     private val inflate: FragmentInflate<VB>,
 ) : Fragment() {
@@ -25,7 +29,6 @@ abstract class BaseFragment<VB : ViewBinding>(
         savedInstanceState: Bundle?,
     ): View? {
         _binding = inflate.invoke(inflater, container, false)
-
         return binding.root
     }
 

@@ -1,35 +1,42 @@
 package com.eunho.crossfitranker.view.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eunho.crossfitranker.common.commonToast
-import com.eunho.crossfitranker.common.ioDispatchers
 import com.eunho.crossfitranker.data.firebase.FirebaseManger
 import com.eunho.crossfitranker.data.firebase.WodRankingRecord
 import com.eunho.crossfitranker.data.firebase.WodRecordTitle
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
+/**
+ * home > wod,free 탭 뷰모델
+ * */
 class HomeWodViewModel: ViewModel(){
 
     private val firebaseManager by lazy {
         FirebaseManger()
     }
-    var wodLiveData = MutableLiveData<List<WodRecordTitle>>()
-    var freeLiveData = MutableLiveData<List<WodRecordTitle>>()
-    var rankingRecord = MutableLiveData<List<WodRankingRecord>>()
+    // wod tab 와드 리스트
+    private var _wodLiveData = MutableLiveData<List<WodRecordTitle>>()
+    // free tab 와드 리스트
+    private var _freeLiveData = MutableLiveData<List<WodRecordTitle>>()
+    //
+    private var _rankingRecord = MutableLiveData<List<WodRankingRecord>>()
+
+    val wodLiveData = _wodLiveData
+    val freeLiveData = _freeLiveData
+    val rankingRecord = _rankingRecord
 
     /**
      * wod tab 와드 리스트
-     *
      * */
     fun wodListData(){
         viewModelScope.launch {
-            val wodList = async { firebaseManager.boxAllWod() }
-            wodLiveData.postValue(wodList.await())
+            val wodList = async {
+                firebaseManager.boxAllWod()
+            }
+            _wodLiveData.postValue(wodList.await())
         }
     }
 
@@ -38,29 +45,26 @@ class HomeWodViewModel: ViewModel(){
      * */
     fun getRecordRanking(wodId:String){
         viewModelScope.launch {
-            val wodRanking = firebaseManager.getRecordRanking(wodId)
-            rankingRecord.postValue(wodRanking)
+            _rankingRecord.postValue(firebaseManager.getRecordRanking(wodId))
         }
     }
 
+    /**
+     * 와드 검색
+     * */
     fun searchWods(query: String){
         viewModelScope.launch {
-
-            Log.e("test","searchWods")
-            val wodList = firebaseManager.searchWod(query)
-
-            wodLiveData.setValue(wodList)
+            _wodLiveData.setValue( firebaseManager.searchWod(query))
         }
     }
 
     /**
      * wod tab 와드 리스트
-     *
      * */
     fun freeListData(){
         viewModelScope.launch {
             val wodList = async { firebaseManager.freeAllWod() }
-            freeLiveData.postValue(wodList.await())
+            _freeLiveData.postValue(wodList.await())
         }
     }
 

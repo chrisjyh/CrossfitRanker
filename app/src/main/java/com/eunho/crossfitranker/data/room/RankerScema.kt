@@ -11,7 +11,9 @@ import com.eunho.crossfitranker.common.WODCOLLECT
 import com.eunho.crossfitranker.common.WODID
 import com.eunho.crossfitranker.common.getCurrentDateTimeAsString
 import org.apache.commons.lang3.StringUtils
-
+/**
+ * 와드 리스트
+ * */
 @Entity(tableName= WODCOLLECT)
 class Wod {
     @PrimaryKey(autoGenerate = true)
@@ -42,7 +44,9 @@ class Wod {
         this.wodType = wodType
     }
 }
-
+/**
+ * 와드에 대한 기록
+ * */
 @Entity(
     tableName = "record"
     , foreignKeys = [
@@ -61,11 +65,14 @@ class Record {
     @ColumnInfo(name = "wod_id")
     var wodId: Int = 0
     @ColumnInfo(name="record")
-    var record: String = ""
+    var record: String = StringUtils.EMPTY
     @ColumnInfo(name = "reg_date")
-    var regDate: String = ""
+    var regDate: String = StringUtils.EMPTY
 }
 
+/**
+ * 개인 기록들
+ * */
 data class PersonalRecord(
     @ColumnInfo(name = "wod_id") var wodId: Int,
     @ColumnInfo(name = "wod_title") var title: String,

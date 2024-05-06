@@ -2,6 +2,7 @@
     <string name="app_name">CrossfitRanker</string>
     <string name="title_home">Home</string>
     <string name="title_challenge">Challenge</string>
+    <string name="title_challenge_camera">Challenge Camera</string>
     <string name="title_mypage">My Page</string>
     <string name="home_tab01">WOD</string>
     <string name="home_tab02">FREE</string>
@@ -51,4 +52,11 @@
     <string name="sample_challenge_item_title">SQUAT 1MIN</string>
     <string name="sample_challenge_item_content">1분동안 최대한 많은 스쿼트를 수행</string>
     <string name="sample_challenge_item_record">1등 기록 : 100 \n 나의 기록 : 11</string>
+
+    <string name="toast_wod_record_dialog_empty">기록을 입력 하세요.</string>
+    <string name="toast_wod_record_dialog_fail">입력 실패 \n 나중에 다시 시도해 주세요.</string>
+    <string name="toast_enroll_success">입력 완료</string>
+
+    <string name="toast_camera_fail">카메라 전환 실패</string>
+
 </resources>

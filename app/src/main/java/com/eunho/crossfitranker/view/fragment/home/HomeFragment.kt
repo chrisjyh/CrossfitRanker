@@ -1,19 +1,24 @@
 package com.eunho.crossfitranker.view.fragment.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.lifecycleScope
 import com.eunho.crossfitranker.R
 import com.eunho.crossfitranker.databinding.FragmentHomeBinding
 import com.eunho.crossfitranker.view.fragment.BaseFragment
-import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import reactivecircus.flowbinding.material.tabSelectionEvents
 
-
-class HomeFragment :BaseFragment<FragmentHomeBinding>(
+/**
+ * 홈 화면
+ * 탭 관리
+ * */
+class HomeFragment : BaseFragment<FragmentHomeBinding>(
     FragmentHomeBinding::inflate
 ) {
     override fun onCreateView(
@@ -28,34 +33,36 @@ class HomeFragment :BaseFragment<FragmentHomeBinding>(
 
 
         with(binding) {
-            homeTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?){
-                    when(tab?.position){
-                        0 -> { replaceFragment(wodFragment) }
-                        1 -> { replaceFragment(freeFragment) }
-                        2 -> { replaceFragment(personalFragment) }
+            // tab 변경
+            homeTabLayout
+                .tabSelectionEvents()
+                .onEach {
+                    // tab 선택 될때
+                    if(it.tab.isSelected){
+                        when(it.tab.position){
+                            0 -> { replaceFragment(wodFragment) }
+                            1 -> { replaceFragment(freeFragment) }
+                            2 -> { replaceFragment(personalFragment) }
+                        }
                     }
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            })
+                }.launchIn(lifecycleScope)
         }
-
         replaceFragment(wodFragment)
         return binding.root
     }
+
     override fun onViewCreated() {}
 
-    // fragment 교체
+    /**
+     * fragment 교체
+     */
     private fun replaceFragment(fragment: Fragment) {
-        val transition = requireActivity().supportFragmentManager.beginTransaction()
-
-        transition.replace(R.id.fragment_container, fragment)
-        transition.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        transition.addToBackStack(fragment.toString())
-        transition.commit()
+        with(requireActivity().supportFragmentManager.beginTransaction()) {
+            replace(R.id.fragment_container, fragment)
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            addToBackStack(fragment.toString())
+            commit()
+        }
     }
 }
 

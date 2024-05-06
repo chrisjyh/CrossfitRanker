@@ -1,6 +1,5 @@
 package com.eunho.crossfitranker.view.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eunho.crossfitranker.common.RoomDataResult
@@ -13,6 +12,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * home > personal 전용 view model
+ * */
 class HomePersonalViewModel: ViewModel(){
 
     private val repository: RoomRepository by lazy {
@@ -20,8 +22,9 @@ class HomePersonalViewModel: ViewModel(){
     }
 
     private var _personalRecord = MutableStateFlow<RoomDataResult<List<PersonalRecord>>>(RoomDataResult.NoConstructor)
-    val personalRecordList get() = _personalRecord.asStateFlow()
+    val personalRecordList = _personalRecord.asStateFlow()
 
+    // 개인 와드 리스트
     fun findAllWodList() = viewModelScope.launch {
         withContext(ioDispatchers.coroutineContext) {
             repository.findAllPersonalRecord().collect {
@@ -31,8 +34,7 @@ class HomePersonalViewModel: ViewModel(){
     }
     fun insertRecord(wod: Wod) {
         viewModelScope.launch {
-                repository.insertWod(wod)
-
+            repository.insertWod(wod)
         }
     }
 

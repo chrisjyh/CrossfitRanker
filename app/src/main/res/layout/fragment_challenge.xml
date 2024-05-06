@@ -34,7 +34,6 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_squat_challenge_start"
         app:layout_constraintBottom_toBottomOf="parent"
-
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

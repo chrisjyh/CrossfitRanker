@@ -1,14 +1,11 @@
 package com.eunho.crossfitranker
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.eunho.crossfitranker.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.navigation.ui.setupActionBarWithNavController
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

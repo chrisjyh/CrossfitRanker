@@ -11,8 +11,9 @@ import com.eunho.crossfitranker.common.DATAWODTYPE
 import com.eunho.crossfitranker.common.RECORD
 import com.eunho.crossfitranker.common.USERID
 import com.eunho.crossfitranker.common.WODID
-import com.eunho.crossfitranker.common.getCurrentDateTimeAsString
-
+/**
+ *  와드 등록 형식
+ */
 data class WodInsertForm(
     val title: String = "",
     val wod: String = "",
@@ -34,6 +35,10 @@ data class WodInsertForm(
         )
     }
 }
+
+/**
+ * 와드 별 기록 등록 형식
+ * */
 data class RecordInsertForm(
     val record: String,
     val wodId: String,
@@ -51,12 +56,18 @@ data class RecordInsertForm(
 }
 
 
+/**
+ * 본인의 기록과 랭킹
+ * */
 data class WodRankingRecord(
     var ranking: Int,
     var record: String,
     var userNickName: String,
 )
 
+/**
+ * 와드 리스트 표기
+ * */
 data class WodRecordTitle(
     var wodId: String,
     var wodTitle: String,

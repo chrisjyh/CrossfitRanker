@@ -10,8 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eunho.crossfitranker.data.firebase.WodRankingRecord
 import com.eunho.crossfitranker.databinding.ItemRankingBinding
 
+/**
+ * 랭킹 리스트 어답터
+ * */
 class RankingListAdaptor(): ListAdapter<WodRankingRecord, RecyclerView.ViewHolder>(RankingDiffCallback) {
     companion object {
+        // 닉네임 기준 으로 같음 여부 확인
         val RankingDiffCallback = object : DiffUtil.ItemCallback<WodRankingRecord>() {
             override fun areItemsTheSame(oldItem: WodRankingRecord, newItem: WodRankingRecord): Boolean {
                 return oldItem.userNickName == newItem.userNickName
@@ -39,7 +43,7 @@ class RankingListAdaptor(): ListAdapter<WodRankingRecord, RecyclerView.ViewHolde
         }
     }
     /**
-     * 와드 view holder
+     * 랭킹 뷰홀더
      * */
     inner class RankingViewHolder(
         private val binding: ItemRankingBinding
@@ -58,7 +62,6 @@ class RankingListAdaptor(): ListAdapter<WodRankingRecord, RecyclerView.ViewHolde
                 tvRankingItemTitle.text = data.userNickName
                 tvRankingItemRecord.text = data.record
                 tvRankingGrade.text = ranking.toString()
-
             }
         }
     }

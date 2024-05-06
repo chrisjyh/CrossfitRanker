@@ -5,13 +5,24 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 
+
+/**
+ * DAO
+ * 개인 기록 ROOM
+ * */
 @Dao
 interface RankerDAO {
+    /**
+     * 와드 등록
+     * */
     @Transaction
     @Insert
     fun insertWod(wod: Wod)
 
 
+    /**
+     * 와드 리스트
+     * */
     @Query("""
         select 
             w.wod_id as "wod_id",
