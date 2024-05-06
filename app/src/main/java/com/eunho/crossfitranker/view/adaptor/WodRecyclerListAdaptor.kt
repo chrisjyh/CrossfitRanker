@@ -15,6 +15,7 @@ import com.eunho.crossfitranker.data.firebase.WodRecordTitle
 import com.eunho.crossfitranker.databinding.ItemWodBinding
 import com.eunho.crossfitranker.view.fragment.home.WodDetailDialog
 import com.eunho.crossfitranker.view.fragment.home.WodRecordDialog
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -27,6 +28,7 @@ import reactivecircus.flowbinding.android.view.clicks
 class WodRecyclerListAdaptor(
     private val fragmentManager: FragmentManager
 ): ListAdapter<WodRecordTitle, RecyclerView.ViewHolder>(WodDiffCallback) {
+
     // DifUtil 설정
     object WodDiffCallback: DiffUtil.ItemCallback<WodRecordTitle>() {
         override fun areItemsTheSame(oldItem: WodRecordTitle, newItem: WodRecordTitle): Boolean {
@@ -65,6 +67,7 @@ class WodRecyclerListAdaptor(
 
         @SuppressLint("SetTextI18n", "CommitTransaction")
         fun bind(data: WodRecordTitle){
+
             with(binding){
                 // 다이얼 로그 프레그 먼트 생성
                 root.setOnClickListener{

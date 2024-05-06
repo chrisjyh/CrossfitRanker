@@ -80,6 +80,7 @@ class WodRecordDialog(
             USER,
             getCurrentDateTimeAsString()
         ).toMap()
+
         // fireStore 기록 저장
         val isInsertData = firebaseDB.collection(RECORD)
             .add(insertData)

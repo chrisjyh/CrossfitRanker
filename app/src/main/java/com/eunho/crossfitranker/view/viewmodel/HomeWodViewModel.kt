@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
  * */
 class HomeWodViewModel: ViewModel(){
 
+
     private val firebaseManager by lazy {
         FirebaseManger()
     }
