@@ -14,10 +14,15 @@ BOX : 체육관
 
 ## 사용기술
 Arcitecture - Clean Architecture, MVVM
+
 UI - Material3, FlowBinding
+
 JetPack - Navigation, RoomDB, StateFlow, Preferences DAtaStore
+
 API - Firebase, ML-kit
+
 ETC - CameraX, Coroutine, Flow
+
 
 ## 기능 소개
 ### 홈 화면 - WOD 공유 및 등록 랭킹 열람
